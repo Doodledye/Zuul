@@ -9,13 +9,15 @@
  *  an ihr die Methode "spielen" aufgerufen werden.
  * 
  *  Diese Instanz erzeugt und initialisiert alle anderen Objekte
- *  der Anwendung: Sie legt alle Räume und einen Parser an und
+ *  der Anwendung: Sie legt alle RÃ¤ume und einen Parser an und
  *    et das Spiel. Sie wertet auch die Befehle aus, die der
- *  Parser liefert, und sorgt für ihre Ausführung.
+ *  Parser liefert, und sorgt fÃ¼r ihre AusfÃ¼hrung.
  * 
- * @author  Michael Kölling und David J. Barnes
+ * @author  Michael KÃ¶lling und David J. Barnes
  * @version 2006.03.30
  */
+
+// HalloWelt
 
 class Spiel 
 {
@@ -32,25 +34,25 @@ class Spiel
     }
 
     /**
-     * Erzeuge alle Räume und verbinde ihre Ausgänge miteinander.
+     * Erzeuge alle RÃ¤ume und verbinde ihre AusgÃ¤nge miteinander.
      */
     private void raeumeAnlegen()
     {
         Raum start, nothing, enemy1, enemy2, key, bomb, weapon1, weapon2, defuser, boost;
 
-        // die Räume erzeugen
+        // die RÃ¤ume erzeugen
         start = new Raum("am Start");
         nothing = new Raum("in der Mitte");
-        enemy1= new Raum("ACHTUNG! ein Gegner, er bewacht den Schlüsselraum.");
+        enemy1= new Raum("ACHTUNG! ein Gegner, er bewacht den SchlÃ¼sselraum.");
         enemy2 = new Raum("ACHTUNG! ein Gegner, er bewacht den Waffenraum 2 und den Defuserraum.");
-        key = new Raum("im Schlüsselraum, hier ist der Schlüssel und eine Waffe.");
-        bomb = new Raum("im Bombenraum sie müssen die Bombe defusen.");
+        key = new Raum("im SchlÃ¼sselraum, hier ist der SchlÃ¼ssel und eine Waffe.");
+        bomb = new Raum("im Bombenraum sie mÃ¼ssen die Bombe defusen.");
         weapon1 = new Raum("in einem Waffenraum, hier ist eine Waffe.");
         weapon2 = new Raum("in einem Waffenraum, hier ist eine Waffe.");
         defuser = new Raum("ACHTUNG! hier ist ein Gegner, er bewacht den Defuser.");
         boost = new Raum("in einem Boostraum, hier ist ein Leistungsboost.");
 
-        // die Ausgänge initialisieren
+        // die AusgÃ¤nge initialisieren
         start.setzeAusgaenge(null, nothing, null, null,null,null);
         nothing.setzeAusgaenge(enemy1, enemy2, bomb, start,boost,null);
         enemy1.setzeAusgaenge(null, null, nothing, key,null,null);
@@ -64,7 +66,7 @@ class Spiel
     }
 
     /**
-     * Die Hauptmethode zum Spielen. Läuft bis zum Ende des Spiels
+     * Die Hauptmethode zum Spielen. LÃ¤uft bis zum Ende des Spiels
      * in einer Schleife.
      */
     public void spielen() 
@@ -72,18 +74,18 @@ class Spiel
         willkommenstextAusgeben();
 
         // Die Hauptschleife. Hier lesen wir wiederholt Befehle ein
-        // und führen sie aus, bis das Spiel beendet wird.
+        // und fÃ¼hren sie aus, bis das Spiel beendet wird.
 
         boolean beendet = false;
         while (! beendet) {
             Befehl befehl = parser.liefereBefehl();
             beendet = verarbeiteBefehl(befehl);
         }
-        System.out.println("Danke für dieses Spiel. Auf Wiedersehen.");
+        System.out.println("Danke fÃ¼r dieses Spiel. Auf Wiedersehen.");
     }
 
     /**
-     * Einen Begrüßungstext für den Spieler ausgeben.
+     * Einen BegrÃ¼ÃŸungstext fÃ¼r den Spieler ausgeben.
      */
     private void willkommenstextAusgeben()
     {
@@ -97,7 +99,7 @@ class Spiel
     }
 
     /**
-     * Verarbeite einen gegebenen Befehl (führe ihn aus).
+     * Verarbeite einen gegebenen Befehl (fÃ¼hre ihn aus).
      * @param befehl Der zu verarbeitende Befehl.
      * @return 'true', wenn der Befehl das Spiel beendet, 'false' sonst.
      */
@@ -106,7 +108,7 @@ class Spiel
         boolean moechteBeenden = false;
 
         if(befehl.istUnbekannt()) {
-            System.out.println("Ich weiß nicht, was Sie meinen...");
+            System.out.println("Ich weiÃŸ nicht, was Sie meinen...");
             return false;
         }
 
@@ -126,14 +128,14 @@ class Spiel
     /**
      * Gib Hilfsinformationen aus.
      * Hier geben wir eine etwas alberne und unklare Beschreibung
-     * aus, sowie eine Liste der Befehlswörter.
+     * aus, sowie eine Liste der BefehlswÃ¶rter.
      */
     private void hilfstextAusgeben() 
     {
         System.out.println("Sie haben sich verlaufen. Sie sind allein.");
-        System.out.println("Sie irren auf dem Unigelände herum.");
+        System.out.println("Sie irren auf dem UnigelÃ¤nde herum.");
         System.out.println();
-        System.out.println("Ihnen stehen folgende Befehle zur Verfügung:");
+        System.out.println("Ihnen stehen folgende Befehle zur VerfÃ¼gung:");
         System.out.println("   go quit help");
     }
 
@@ -146,7 +148,7 @@ class Spiel
     {
         if(!befehl.hatZweitesWort()) {
             // Gibt es kein zweites Wort, wissen wir nicht, wohin...
-            System.out.println("Wohin möchten Sie gehen?");
+            System.out.println("Wohin mÃ¶chten Sie gehen?");
             return;
         }
 
@@ -166,7 +168,7 @@ class Spiel
 
     public void rauminfoAusgeben(){
         System.out.println("Sie sind " + aktuellerRaum.gibBeschreibung());
-        System.out.print("Ausgänge: ");
+        System.out.print("AusgÃ¤nge: ");
         if(aktuellerRaum.gibAusgang("north") != null)
             System.out.print("north ");
         if(aktuellerRaum.gibAusgang("east") != null)
@@ -184,7 +186,7 @@ class Spiel
     }
 
     /**
-     * "quit" wurde eingegeben. Überprüfe den Rest des Befehls,
+     * "quit" wurde eingegeben. ÃœberprÃ¼fe den Rest des Befehls,
      * ob das Spiel wirklich beendet werden soll.
      * @return 'true', wenn der Befehl das Spiel beendet, 'false' sonst.
      */
